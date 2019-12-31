@@ -1,0 +1,23 @@
+{
+    "python.pythonPath": "C:\\Program Files (x86)\\Python3\\python.exe",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.autoComplete.extraPaths": [
+        "C:\\Program Files (x86)\\Python3\\Lib\\site-packages"
+    ],
+    "cSpell.ignoreWords": [
+        "pygubu"
+    ],
+    "sqltools.connections": [
+        {
+            "database": "${workspaceFolder}\\builds.db",
+            "dialect": "SQLite",
+            "name": "BriskBuilder"
+        }
+    ],
+    "sqltools.useNodeRuntime": true,
+    "cSpell.words": [
+        "Notif",
+        "isalnum"
+    ]
+}
