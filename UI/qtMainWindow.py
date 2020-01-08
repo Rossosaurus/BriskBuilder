@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\Ross\Documents\Programming\Python\BriskBuilder\UI\qtMainWindow.ui'
+# Form implementation generated from reading ui file 'p:\Python\BriskBuilder\UI\qtMainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.2
 #
@@ -19,27 +19,26 @@ class Ui_winMain(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(winMain.sizePolicy().hasHeightForWidth())
         winMain.setSizePolicy(sizePolicy)
+        winMain.setMinimumSize(QtCore.QSize(400, 500))
+        winMain.setMaximumSize(QtCore.QSize(400, 500))
         winMain.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         winMain.setTabShape(QtWidgets.QTabWidget.Rounded)
         winMain.setDockNestingEnabled(True)
         winMain.setUnifiedTitleAndToolBarOnMac(True)
         self.centralwidget = QtWidgets.QWidget(winMain)
         self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout.setContentsMargins(2, 2, 2, 2)
+        self.gridLayout.setObjectName("gridLayout")
         self.twMain = QtWidgets.QTabWidget(self.centralwidget)
-        self.twMain.setGeometry(QtCore.QRect(0, 0, 400, 500))
         self.twMain.setObjectName("twMain")
         self.tabBuilds = QtWidgets.QWidget()
         self.tabBuilds.setMaximumSize(QtCore.QSize(394, 474))
         self.tabBuilds.setContextMenuPolicy(QtCore.Qt.NoContextMenu)
         self.tabBuilds.setObjectName("tabBuilds")
-        self.scrollArea = QtWidgets.QScrollArea(self.tabBuilds)
-        self.scrollArea.setGeometry(QtCore.QRect(1, 1, 393, 473))
-        self.scrollArea.setWidgetResizable(True)
-        self.scrollArea.setObjectName("scrollArea")
-        self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 391, 471))
-        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.tabBuilds)
+        self.gridLayout_2.setContentsMargins(1, 1, 1, 1)
+        self.gridLayout_2.setObjectName("gridLayout_2")
         self.twMain.addTab(self.tabBuilds, "")
         self.tabNewBuild = QtWidgets.QWidget()
         self.tabNewBuild.setObjectName("tabNewBuild")
@@ -80,10 +79,11 @@ class Ui_winMain(object):
         self.btnNewLanguage.setGeometry(QtCore.QRect(294, 70, 91, 23))
         self.btnNewLanguage.setObjectName("btnNewLanguage")
         self.twMain.addTab(self.tabNewBuild, "")
+        self.gridLayout.addWidget(self.twMain, 0, 0, 1, 1)
         winMain.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(winMain)
-        self.twMain.setCurrentIndex(1)
+        self.twMain.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(winMain)
 
     def retranslateUi(self, winMain):
@@ -97,13 +97,3 @@ class Ui_winMain(object):
         self.btnAddBuild.setText(_translate("winMain", "Create New Build"))
         self.btnNewLanguage.setText(_translate("winMain", "New Language"))
         self.twMain.setTabText(self.twMain.indexOf(self.tabNewBuild), _translate("winMain", "Create New Build"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    winMain = QtWidgets.QMainWindow()
-    ui = Ui_winMain()
-    ui.setupUi(winMain)
-    winMain.show()
-    sys.exit(app.exec_())

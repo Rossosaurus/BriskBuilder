@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtWidgets, QtGui
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QGroupBox, QHBoxLayout, QVBoxLayout, QFrame, QLabel, QPushButton, QScrollArea
 from UI.qtMainWindow import Ui_winMain
 from UI.qtNewLanguageWindow import Ui_winNL
 from UI.qtNotification import Ui_winNotif
@@ -16,6 +16,7 @@ class winMain(QMainWindow): #Initate class winMain as type QMainWindow
         super(winMain, self).__init__() #Run __init__ function of QMainWindow class
         self.uiMain = Ui_winMain() #Set class variable ui equal to the UI class of winMain in qtMainWindow.py
         self.uiMain.setupUi(self) #Run setupUi to initialize mainWin GUI
+        self.uiMain.twMain.setCurrentIndex(0)
 
 class winNL(QMainWindow):
     def __init__(self):
@@ -38,7 +39,12 @@ class GUI: #Instantiate both classes in single class
         self.Notif = winNotif()
 
         #winMain connections
+        self.genBuilds()
         self.Main.uiMain.btnNewLanguage.clicked.connect(self.openWinNL)
+        self.Main.uiMain.btnAddBuild.clicked.connect(self.addBuild)
+        self.Main.uiMain.twMain.currentChanged.connect(self.generateLanguages)
+        self.Main.uiMain.twMain.currentChanged.connect(self.genBuilds)
+        
 
         #winNL connections
         self.NL.uiNL.tbNL.returnPressed.connect(self.addLanguage)
@@ -50,7 +56,63 @@ class GUI: #Instantiate both classes in single class
     #winMain methods
     def openWinNL(self):
         self.NL.show()
+
+    def generateLanguages(self):
+        self.Main.uiMain.cbLanguage.clear()
+        for language in c.execute("SELECT languageName FROM languages ORDER BY languageName ASC"):
+            self.Main.uiMain.cbLanguage.addItem(language[0])
+
+    def addBuild(self):
+        bName = self.Main.uiMain.tbBuildName.text()
+        bLanguage = self.Main.uiMain.cbLanguage.currentText()
+        bCommand = self.Main.uiMain.tbCommandString.toPlainText()
+        c.execute("INSERT INTO builds VALUES (NULL, ?, ?, ?);", (bName, bLanguage, bCommand))
+        conn.commit()
+        self.Main.uiMain.twMain.setCurrentIndex(0)
     
+    def genBuilds(self):
+        scBuilds = QScrollArea()
+        scBuilds.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        scBuilds.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        scBuildsVLB = QVBoxLayout()
+        for i in reversed(range(scBuildsVLB.count())):
+            scBuildsVLB.itemAt(i).widget().setParent(None)
+        for language in c.execute("SELECT languageName FROM languages ORDER BY languageName ASC"):
+            print(language)
+            gb = QGroupBox(language[0])
+            gb.setMinimumSize(360, 50)
+            gb.setMaximumWidth(360)
+            vlb = QVBoxLayout()
+            vlb.setContentsMargins(3,3,3,3)
+            vlb.setSpacing(3)
+            c1 = conn.cursor()
+            for build in c1.execute("SELECT * FROM builds WHERE buildLanguage = ?", (language[0],)):
+                frame = QFrame()
+                hlb = QHBoxLayout()
+                frame.setMaximumSize(360, 20)
+                hlb.setContentsMargins(5,0,0,0)
+                hlb.setSpacing(6)
+                btnBuild = QPushButton("Build")
+                btnBuild.setMaximumSize(50, 20)
+                btnBuild.setProperty("ID", build[0])
+                btnBuild.clicked.connect(lambda: self.runBuild(btnBuild.property("ID")))
+                lblBuildName = QLabel(build[1])
+                lblBuildName.setMaximumSize(233,20)
+                lblBuildLanguage = QLabel(build[2])
+                lblBuildLanguage.setMaximumSize(60, 20)
+                hlb.addWidget(lblBuildName)
+                hlb.addWidget(lblBuildLanguage)
+                hlb.addWidget(btnBuild)
+                frame.setLayout(hlb)
+                vlb.addWidget(frame)
+            gb.setLayout(vlb)
+            scBuildsVLB.addWidget(gb)
+        scBuildsVLB.addStretch()
+        scBuilds.setLayout(scBuildsVLB)
+        self.Main.uiMain.gridLayout_2.addChildWidget(scBuilds)
+
+    def runBuild(self, buildID):
+        print(buildID)
     #winNL methods
     def addLanguage(self):
         l = self.NL.uiNL.tbNL.text().upper()
@@ -59,9 +121,11 @@ class GUI: #Instantiate both classes in single class
                 c.execute("INSERT OR IGNORE INTO languages (languageName) VALUES (?);", (l,))
                 conn.commit()
                 self.setMessage(str("The language: " + l + " has successfully been added to the list click OK to return to the previous menu."))
+                self.generateLanguages()
                 self.NL.hide()
         except:
             self.setMessage("An error occurred please submit an issue at <a href=\"https://github.com/Rossosaurus/BriskBuilder\">https://github.com/Rossosaurus/BriskBuilder</a>")
+            self.NL.hide()
 
             
     #winNotif methods

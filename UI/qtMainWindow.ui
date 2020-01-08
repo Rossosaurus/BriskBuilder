@@ -16,6 +16,18 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>400</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>400</width>
+    <height>500</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Brisk Builder</string>
   </property>
@@ -32,179 +44,178 @@
    <bool>true</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="twMain">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>400</width>
-      <height>500</height>
-     </rect>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>2</number>
     </property>
-    <property name="currentIndex">
-     <number>1</number>
+    <property name="topMargin">
+     <number>2</number>
     </property>
-    <widget class="QWidget" name="tabBuilds">
-     <property name="maximumSize">
-      <size>
-       <width>394</width>
-       <height>474</height>
-      </size>
-     </property>
-     <property name="contextMenuPolicy">
-      <enum>Qt::NoContextMenu</enum>
-     </property>
-     <attribute name="title">
-      <string>Builds</string>
-     </attribute>
-     <widget class="QScrollArea" name="scrollArea">
-      <property name="geometry">
-       <rect>
-        <x>1</x>
-        <y>1</y>
-        <width>393</width>
-        <height>473</height>
-       </rect>
+    <property name="rightMargin">
+     <number>2</number>
+    </property>
+    <property name="bottomMargin">
+     <number>2</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="twMain">
+      <property name="currentIndex">
+       <number>0</number>
       </property>
-      <property name="widgetResizable">
-       <bool>true</bool>
-      </property>
-      <widget class="QWidget" name="scrollAreaWidgetContents">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>391</width>
-         <height>471</height>
-        </rect>
+      <widget class="QWidget" name="tabBuilds">
+       <property name="maximumSize">
+        <size>
+         <width>394</width>
+         <height>474</height>
+        </size>
        </property>
+       <property name="contextMenuPolicy">
+        <enum>Qt::NoContextMenu</enum>
+       </property>
+       <attribute name="title">
+        <string>Builds</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <property name="leftMargin">
+         <number>1</number>
+        </property>
+        <property name="topMargin">
+         <number>1</number>
+        </property>
+        <property name="rightMargin">
+         <number>1</number>
+        </property>
+        <property name="bottomMargin">
+         <number>1</number>
+        </property>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabNewBuild">
+       <property name="accessibleName">
+        <string>Add New Build</string>
+       </property>
+       <attribute name="title">
+        <string>Create New Build</string>
+       </attribute>
+       <widget class="QLabel" name="lblBuildName">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>81</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Build Name</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblBuildLanguage">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>70</y>
+          <width>171</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Programming Language</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblCommand">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>140</y>
+          <width>121</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Command String</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btnAddBuild">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>420</y>
+          <width>120</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Create New Build</string>
+        </property>
+       </widget>
+       <widget class="QPlainTextEdit" name="tbCommandString">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>170</y>
+          <width>374</width>
+          <height>231</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="tbBuildName">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>40</y>
+          <width>374</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="cbLanguage">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>100</y>
+          <width>374</width>
+          <height>22</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btnNewLanguage">
+        <property name="geometry">
+         <rect>
+          <x>294</x>
+          <y>70</y>
+          <width>91</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>New Language</string>
+        </property>
+       </widget>
       </widget>
      </widget>
-    </widget>
-    <widget class="QWidget" name="tabNewBuild">
-     <property name="accessibleName">
-      <string>Add New Build</string>
-     </property>
-     <attribute name="title">
-      <string>Create New Build</string>
-     </attribute>
-     <widget class="QLabel" name="lblBuildName">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>81</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Build Name</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lblBuildLanguage">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>70</y>
-        <width>171</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Programming Language</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lblCommand">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>140</y>
-        <width>121</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Command String</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnAddBuild">
-      <property name="geometry">
-       <rect>
-        <x>140</x>
-        <y>420</y>
-        <width>120</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>9</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Create New Build</string>
-      </property>
-     </widget>
-     <widget class="QPlainTextEdit" name="tbCommandString">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>170</y>
-        <width>374</width>
-        <height>231</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="tbBuildName">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>374</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="cbLanguage">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>100</y>
-        <width>374</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnNewLanguage">
-      <property name="geometry">
-       <rect>
-        <x>294</x>
-        <y>70</y>
-        <width>91</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>New Language</string>
-      </property>
-     </widget>
-    </widget>
-   </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
