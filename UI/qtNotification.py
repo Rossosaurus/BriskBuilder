@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\Ross\Documents\Programming\Python\BriskBuilder\UI\qtNotification.ui'
+# Form implementation generated from reading ui file 'p:\Python\BriskBuilder\UI\qtNotification.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.2
 #
@@ -21,10 +21,10 @@ class Ui_winNotif(object):
         self.lblTitle.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.lblTitle.setObjectName("lblTitle")
         self.btnOk = QtWidgets.QPushButton(self.widget)
-        self.btnOk.setGeometry(QtCore.QRect(78, 100, 75, 23))
+        self.btnOk.setGeometry(QtCore.QRect(78, 130, 75, 23))
         self.btnOk.setObjectName("btnOk")
         self.lblMessage = QtWidgets.QLabel(self.widget)
-        self.lblMessage.setGeometry(QtCore.QRect(10, 30, 211, 61))
+        self.lblMessage.setGeometry(QtCore.QRect(10, 30, 211, 91))
         self.lblMessage.setText("")
         self.lblMessage.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.lblMessage.setWordWrap(True)

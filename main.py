@@ -3,8 +3,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QGroupBox, QHBox
 from UI.qtMainWindow import Ui_winMain
 from UI.qtNewLanguageWindow import Ui_winNL
 from UI.qtNotification import Ui_winNotif
-import sqlite3
-import sys
+import sqlite3, subprocess, sys
 
 #Initialize SQLite3
 conn = sqlite3.connect('builds.db')
@@ -78,7 +77,6 @@ class GUI: #Instantiate both classes in single class
         for i in reversed(range(scBuildsVLB.count())):
             scBuildsVLB.itemAt(i).widget().setParent(None)
         for language in c.execute("SELECT languageName FROM languages ORDER BY languageName ASC"):
-            print(language)
             gb = QGroupBox(language[0])
             gb.setMinimumSize(360, 50)
             gb.setMaximumWidth(360)
@@ -87,6 +85,7 @@ class GUI: #Instantiate both classes in single class
             vlb.setSpacing(3)
             c1 = conn.cursor()
             for build in c1.execute("SELECT * FROM builds WHERE buildLanguage = ?", (language[0],)):
+                print(build)
                 frame = QFrame()
                 hlb = QHBoxLayout()
                 frame.setMaximumSize(360, 20)
@@ -94,8 +93,7 @@ class GUI: #Instantiate both classes in single class
                 hlb.setSpacing(6)
                 btnBuild = QPushButton("Build")
                 btnBuild.setMaximumSize(50, 20)
-                btnBuild.setProperty("ID", build[0])
-                btnBuild.clicked.connect(lambda: self.runBuild(btnBuild.property("ID")))
+                btnBuild.clicked.connect(lambda checked, buildID=build[0]: self.runBuild(buildID))
                 lblBuildName = QLabel(build[1])
                 lblBuildName.setMaximumSize(233,20)
                 lblBuildLanguage = QLabel(build[2])
@@ -112,7 +110,16 @@ class GUI: #Instantiate both classes in single class
         self.Main.uiMain.gridLayout_2.addChildWidget(scBuilds)
 
     def runBuild(self, buildID):
-        print(buildID)
+        buildName = ""
+        buildCommand = ""
+        for build in c.execute("SELECT * FROM builds WHERE buildID = ? LIMIT 1", (buildID,)):
+            buildName = build[1]
+            buildCommand = build[3]
+        try:
+            subprocess.run("buildCommand")
+        except FileNotFoundError:
+            self.setMessage("The program you were trying to run could not be found in the specified location. You have probably not included the path to the program however, if you have and you still get this error try adding the program to PATH in your environment variables so you don't need to include the full path or open a an issue on github.")
+
     #winNL methods
     def addLanguage(self):
         l = self.NL.uiNL.tbNL.text().upper()
