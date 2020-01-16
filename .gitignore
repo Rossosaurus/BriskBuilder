@@ -1,2 +1,5 @@
 ${workspaceFolder}/
 .vscode/
+TestLanguageScripts/
+**/**.psd
+builds.db
